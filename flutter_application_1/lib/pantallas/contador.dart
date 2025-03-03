@@ -8,6 +8,8 @@ class contador extends StatefulWidget {
 }
 
 class _contadorState extends State<contador> {
+  int clickContador = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,16 +19,46 @@ class _contadorState extends State<contador> {
           children: [
             Text('Cantidad de clicks'),
             Text(
-              '0',
+              '$clickContador',
               style: TextStyle(fontSize: 150, fontWeight: FontWeight.bold),
             ),
           ],
         ),
       ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.plus_one),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: Align(
+        alignment: Alignment.bottomRight,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                clickContador = 0;
+                setState(() {});
+              },
+              child: Icon(Icons.refresh),
+            ),
+            SizedBox(height: 10),
+            FloatingActionButton(
+              onPressed: () {
+                clickContador++;
+                setState(() {});
+              },
+              child: Icon(Icons.add),
+            ),
+            SizedBox(height: 10),
+            FloatingActionButton(
+              onPressed: () {
+                if (clickContador > 0) {
+                  clickContador--;
+                }
+                setState(() {});
+              },
+              child: Icon(Icons.remove),
+            ),
+          ],
+        ),
       ),
     );
   }
